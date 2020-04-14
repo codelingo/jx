@@ -11,12 +11,21 @@ import (
 
 type JenkinsV1Interface interface {
 	RESTClient() rest.Interface
+	AppsGetter
+	BuildPacksGetter
+	CommitStatusesGetter
 	EnvironmentsGetter
 	EnvironmentRoleBindingsGetter
 	ExtensionsGetter
+	FactsGetter
 	GitServicesGetter
 	PipelineActivitiesGetter
+	PipelineStructuresGetter
+	PluginsGetter
 	ReleasesGetter
+	SchedulersGetter
+	SourceRepositoriesGetter
+	SourceRepositoryGroupsGetter
 	TeamsGetter
 	UsersGetter
 	WorkflowsGetter
@@ -25,6 +34,18 @@ type JenkinsV1Interface interface {
 // JenkinsV1Client is used to interact with features provided by the jenkins.io group.
 type JenkinsV1Client struct {
 	restClient rest.Interface
+}
+
+func (c *JenkinsV1Client) Apps(namespace string) AppInterface {
+	return newApps(c, namespace)
+}
+
+func (c *JenkinsV1Client) BuildPacks(namespace string) BuildPackInterface {
+	return newBuildPacks(c, namespace)
+}
+
+func (c *JenkinsV1Client) CommitStatuses(namespace string) CommitStatusInterface {
+	return newCommitStatuses(c, namespace)
 }
 
 func (c *JenkinsV1Client) Environments(namespace string) EnvironmentInterface {
@@ -39,6 +60,10 @@ func (c *JenkinsV1Client) Extensions(namespace string) ExtensionInterface {
 	return newExtensions(c, namespace)
 }
 
+func (c *JenkinsV1Client) Facts(namespace string) FactInterface {
+	return newFacts(c, namespace)
+}
+
 func (c *JenkinsV1Client) GitServices(namespace string) GitServiceInterface {
 	return newGitServices(c, namespace)
 }
@@ -47,8 +72,28 @@ func (c *JenkinsV1Client) PipelineActivities(namespace string) PipelineActivityI
 	return newPipelineActivities(c, namespace)
 }
 
+func (c *JenkinsV1Client) PipelineStructures(namespace string) PipelineStructureInterface {
+	return newPipelineStructures(c, namespace)
+}
+
+func (c *JenkinsV1Client) Plugins(namespace string) PluginInterface {
+	return newPlugins(c, namespace)
+}
+
 func (c *JenkinsV1Client) Releases(namespace string) ReleaseInterface {
 	return newReleases(c, namespace)
+}
+
+func (c *JenkinsV1Client) Schedulers(namespace string) SchedulerInterface {
+	return newSchedulers(c, namespace)
+}
+
+func (c *JenkinsV1Client) SourceRepositories(namespace string) SourceRepositoryInterface {
+	return newSourceRepositories(c, namespace)
+}
+
+func (c *JenkinsV1Client) SourceRepositoryGroups(namespace string) SourceRepositoryGroupInterface {
+	return newSourceRepositoryGroups(c, namespace)
 }
 
 func (c *JenkinsV1Client) Teams(namespace string) TeamInterface {

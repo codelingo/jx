@@ -2,20 +2,6 @@
 
 package v1
 
-type EnvironmentExpansion interface{}
+type SchedulerExpansion interface{}
 
-type EnvironmentRoleBindingExpansion interface{}
-
-type ExtensionExpansion interface{}
-
-type GitServiceExpansion interface{}
-
-type PipelineActivityExpansion interface{}
-
-type ReleaseExpansion interface{}
-
-type TeamExpansion interface{}
-
-type UserExpansion interface{}
-
-type WorkflowExpansion interface{}
+type SourceRepositoryGroupExpansion interface{}
